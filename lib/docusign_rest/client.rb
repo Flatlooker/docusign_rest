@@ -781,7 +781,7 @@ module DocusignRest
                 )
 
       #response = http.request(request)
-      response = Net::HTTP.start(uri.host, uri.port, read_timeout: 500) do |http|
+      response = Net::HTTP.start(uri.host, uri.port, read_timeout: 0) do |http|
         http.request(req)
       end
       generate_log(request, response, uri)
