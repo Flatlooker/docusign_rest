@@ -701,7 +701,8 @@ module DocusignRest
       request = Net::HTTP::Post::Multipart.new(
         uri.request_uri,
         { post_body: post_body }.merge(file_params),
-        headers
+        headers,
+        read_timeout: 500
       )
 
       # DocuSign requires that we embed the document data in the body of the
