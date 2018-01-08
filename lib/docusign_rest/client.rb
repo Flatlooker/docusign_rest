@@ -701,8 +701,7 @@ module DocusignRest
       request = Net::HTTP::Post::Multipart.new(
         uri.request_uri,
         { post_body: post_body }.merge(file_params),
-        headers,
-        read_timeout: 0
+        headers
       )
 
       # DocuSign requires that we embed the document data in the body of the
@@ -781,7 +780,10 @@ module DocusignRest
                   uri, post_body, file_params, headers(options[:headers])
                 )
 
-      response = http.request(request)
+      #response = http.request(request)
+      response = Net::HTTP.start(uri.host, uri.port, read_timeout: 500) do |http|
+        http.request(req)
+      end
       generate_log(request, response, uri)
       JSON.parse(response.body)
     end
