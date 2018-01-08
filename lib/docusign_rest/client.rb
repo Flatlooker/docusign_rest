@@ -702,7 +702,7 @@ module DocusignRest
         uri.request_uri,
         { post_body: post_body }.merge(file_params),
         headers,
-        read_timeout: 500
+        read_timeout: 0
       )
 
       # DocuSign requires that we embed the document data in the body of the
