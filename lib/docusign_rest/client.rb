@@ -780,9 +780,8 @@ module DocusignRest
                   uri, post_body, file_params, headers(options[:headers])
                 )
 
-      #response = http.request(request)
-      response = Net::HTTP.start(uri.host, uri.port, read_timeout: 0) do |http|
-        http.request(req)
+      response = Net::HTTP.start(uri.host, uri.port, read_timeout: 180) do |http|
+        http.request(request)
       end
       generate_log(request, response, uri)
       JSON.parse(response.body)
